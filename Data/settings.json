@@ -1,0 +1,6 @@
+﻿{
+
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=./SQLEXPRESS;Database=HomeItDb;Trusted_Connection=True;MultipleActiveResultSets=true;Username=admin;password=admin"
+  }
+}
