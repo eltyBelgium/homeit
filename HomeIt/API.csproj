@@ -2,10 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>08fd5c8d-9b9a-4c6d-980e-0f4d5cd0a841</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Data\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -17,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
 
