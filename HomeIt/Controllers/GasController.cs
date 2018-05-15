@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using HomeIt.Db;
 using HomeIt.Models;
+using HomeIt.Repositorys;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -13,8 +15,9 @@ namespace API.Controllers
     [Route("api/gas")]
     public class GasController : Controller
     {
-        public DataContext _dataContext { get; set; }
+        public UtilityRepository<Gas> _Repository = new UtilityRepository<Gas>(new DataContext(new DbContextOptions<DataContext>())); 
+
         [HttpGet]
-        public IEnumerable<Gas> Get() => _dataContext.
+        public IEnumerable<Gas> Get() => _Repository.GetAll();
     }
 }

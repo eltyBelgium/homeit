@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HomeIt.Db;
 using HomeIt.Models;
 using Microsoft.EntityFrameworkCore;
@@ -12,29 +13,49 @@ namespace HomeIt.Repositorys
         private readonly DataContext _context;
         private DbSet<T> entities;
         string errorMessage = String.Empty;
+
+        public UtilityRepository(DataContext context)
+        {
+            _context = context;
+            entities = _context.Set<T>();
+        }
         public IEnumerable<T> GetAll()
         {
-            throw new System.NotImplementedException();
+            return entities.AsEnumerable();
         }
 
         public T Get(long id)
         {
-            throw new System.NotImplementedException();
+            return entities.SingleOrDefault(s => s.Id == id);
         }
 
         public void Insert(T entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null)
+            {
+                throw new ArgumentNullException("Entity");
+            }
+            entities.Add(entity);
+            _context.SaveChanges();
         }
 
         public void Update(T entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            _context.SaveChanges();
         }
 
         public void Delete(T entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Remove(entity);
+            _context.SaveChanges();
         }
     }
 }
