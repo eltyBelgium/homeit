@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HomeIt.Models;
 
 namespace HomeIt.Repositorys
@@ -7,8 +8,9 @@ namespace HomeIt.Repositorys
     {
         IEnumerable<T> GetAll();
         T Get(long id);
-        void Insert(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        bool Insert(T entity);
+        bool Update(T entity);
+        bool Delete(T entity);
+        bool LogError(Exception e);
     }
 }

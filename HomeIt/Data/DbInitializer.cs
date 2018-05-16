@@ -12,7 +12,7 @@ namespace HomeIt.Data
         {
             context.Database.EnsureCreated();
 
-            if (context.Electricity.Any() || context.Gas.Any() || context.Water.Any())
+            if (!context.Electricity.Any() || !context.Gas.Any() || !context.Water.Any() ||!context.Errors.Any())
                 return;
 
             var userGuid = Guid.NewGuid();

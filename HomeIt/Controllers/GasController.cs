@@ -15,9 +15,15 @@ namespace API.Controllers
     [Route("api/gas")]
     public class GasController : Controller
     {
-        public UtilityRepository<Gas> _Repository = new UtilityRepository<Gas>(new DataContext(new DbContextOptions<DataContext>())); 
-
+        
+        
         [HttpGet]
-        public IEnumerable<Gas> Get() => _Repository.GetAll();
+        public IEnumerable<Gas> Get()
+        {
+            using (var context = new DataContext())
+            {
+                
+            }
+        } 
     }
 }
