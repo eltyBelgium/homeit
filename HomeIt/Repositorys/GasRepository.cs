@@ -7,96 +7,47 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeIt.Repositorys
 {
-    public class GasRepository : IRepository<BaseUtility>
+    public class GasRepository : IRepository<Gas>
     {
+        private DataContext _context;
 
-        private readonly DataContext _context;
+        public DbSet<Gas> _entity { get; } 
 
-        public GasRepository()
+        public GasRepository(DataContext context)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-
             _context = context;
+            _entity = context.Set<Gas>();
         }
-
         public IEnumerable<Gas> GetAll()
         {
-            return _context.Gas.ToList();
-        }
-        public BaseUtility Get(long id)
-        {
-            return _context.Gas.FirstOrDefault(g => g.Id == id);
+            return _entity.AsEnumerable();
         }
 
-        public bool Insert(BaseUtility entity)
+        public Gas Get(long id)
         {
-            if (entity == null)
-                return false;
-
-            try
-            {
-                _context.Add(entity);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                return LogError(e);
-            }
+            return _entity.FirstOrDefault(e => e.Id == id);
         }
 
-        public bool Update(BaseUtility entity)
+        public void Insert(Gas entity)
         {
-            if (entity == null)
-                return false;
-
-            try
-            {
-                _context.Update(entity);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                return LogError(e);
-            }
-        }
-
-        public bool Delete(BaseUtility entity)
-        {
-            if (entity == null)
-                return false;
-
-            try
-            {
-                _context.Remove(entity);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                return LogError(e);
-            }
-        }
-
-        public bool LogError(Exception e)
-        {
-            _context.Errors.Add(new Errors()
-            {
-                Message = e.Message,
-                StackTrace = e.StackTrace,
-                Timestamp = DateTime.Now
-            });
+            
+            _context.Entry(entity).State = EntityState.Added;
             _context.SaveChanges();
-
-            return false;
         }
 
-        IEnumerable<BaseUtility> IRepository<BaseUtility>.GetAll()
+        public void Update(Gas entity)
         {
-            throw new NotImplementedException();
+            _context.Update(entity);
+            _context.SaveChanges();
         }
 
-        
+        public void Delete(Gas entity)
+        {
+            var gas = Get(entity.Id);
+            _entity.Remove(gas);
+            _context.SaveChanges();
+        }
+
+       
     }
 }

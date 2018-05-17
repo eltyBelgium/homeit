@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using HomeIt.Db;
 using HomeIt.Models;
@@ -15,15 +16,27 @@ namespace API.Controllers
     [Route("api/gas")]
     public class GasController : Controller
     {
-        
-        
-        [HttpGet]
-        public IEnumerable<Gas> Get()
+        private IRepository<Gas> _repository;
+
+        public GasController(IRepository<Gas> repository)
         {
-            using (var context = new DataContext())
-            {
-                
-            }
-        } 
+            _repository = repository;
+        }
+
+        [HttpGet]
+        public IActionResult GetAllGas() => Ok(_repository.GetAll());
+
+        [HttpGet]
+        [Route("/{id}")]
+        public IActionResult GetGas(int id)
+        {
+            if (id == 0 )
+             return NotFound();
+            
+
+            var gas = _repository.Get(id);
+
+            return Ok(gas);
+        }
     }
 }

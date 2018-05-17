@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using HomeIt.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeIt.Repositorys
 {
-    public interface IRepository<T> where T : BaseUtility
+    public interface IRepository<T> where T : class
     {
+        DbSet<T> _entity { get;}
         IEnumerable<T> GetAll();
         T Get(long id);
-        bool Insert(T entity);
-        bool Update(T entity);
-        bool Delete(T entity);
-        bool LogError(Exception e);
+        void Insert(T entity);
+        void Update(T entity);
+        void Delete(T entity);
     }
 }

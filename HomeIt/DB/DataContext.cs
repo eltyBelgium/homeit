@@ -23,9 +23,6 @@ namespace HomeIt.Db
             modelBuilder.Entity<Errors>().ToTable("Errors");
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Data Source=blog.db");
-        }
+      
     }
 }
