@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using API.DTO;
 using HomeIt.Db;
 using HomeIt.Models;
 using HomeIt.Repositorys;
@@ -32,11 +33,14 @@ namespace API.Controllers
         {
             if (id == 0 )
              return NotFound();
-            
-
             var gas = _repository.Get(id);
-
             return Ok(gas);
+        }
+
+        [HttpPost]
+        public IActionResult AddGas([FromBody]GasDTO command)
+        {
+            var gas = command;
         }
     }
 }
