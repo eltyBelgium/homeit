@@ -26,36 +26,37 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllGas() => Ok(_repository.GetAll());
+        public IActionResult GetAll() => Ok(_repository.GetAll());
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetElectricity(int id)
+        public IActionResult Get(int id)
         {
-            if (id == 0 )
+            var item = _repository.Get(id);
+            if (item == null )
              return NotFound();
-            var electricity = _repository.Get(id);
-            return Ok(electricity);
+            
+            return Ok(item);
         }
 
         [HttpPost]
-        public IActionResult AddElectricity([FromBody]ElectricityDTO command)
+        public IActionResult Add([FromBody]ElectricityDTO command)
         {
-            var electricity = new Electricity();;
-            mapper.MapToModel(command, electricity);
+            var item = new Electricity();;
+            mapper.MapToModel(command, item);
 
-            _repository.Insert(electricity);
-            return Created(String.Empty, electricity);
+            _repository.Insert(item);
+            return Created(String.Empty, item);
         }
 
         [HttpPut]
-        public IActionResult UpdateElectricity([FromBody]ElectricityDTO command)
+        public IActionResult Update([FromBody]ElectricityDTO command)
         {
-            var electricity = _repository.Get(command.Id);
+            var item = _repository.Get(command.Id);
             
-            mapper.MapToModel(command, electricity);
+            mapper.MapToModel(command, item);
 
-            _repository.Update(electricity);
+            _repository.Update(item);
 
             return Ok();
         }

@@ -14,19 +14,19 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Controllers
 {
     [Produces("application/json")]
-    [Route("api/gas")]
-    public class GasController : Controller
+    [Route("api/water")]
+    public class WaterController : Controller
     {
-        private IRepository<Gas> _repository;
-        private GasMapper mapper = new GasMapper();
+        private IRepository<Water> _repository;
+        private WaterMapper mapper = new WaterMapper();
 
-        public GasController(IRepository<Gas> repository)
+        public WaterController(IRepository<Water> repository)
         {
             _repository = repository;
         }
 
         [HttpGet]
-        public IActionResult Get() => Ok(_repository.GetAll());
+        public IActionResult GetAll() => Ok(_repository.GetAll());
 
         [HttpGet]
         [Route("{id}")]
@@ -35,15 +35,15 @@ namespace API.Controllers
             var item = _repository.Get(id);
 
             if (item == null)
-             return NotFound();
+                return NotFound();
             return Ok(item);
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody]GasDTO command)
+        public IActionResult Add([FromBody]WaterDTO command)
         {
-            var item = new Gas();;
-            mapper.MapToModel(command,item);
+            var item = new Water();;
+            mapper.MapToModel(command, item);
 
             _repository.Insert(item);
             return Created(String.Empty, item);
@@ -51,7 +51,7 @@ namespace API.Controllers
 
         [HttpPut]
         
-        public IActionResult Update([FromBody]GasDTO command)
+        public IActionResult Update([FromBody]WaterDTO command)
         {
             var item = _repository.Get(command.Id);
             

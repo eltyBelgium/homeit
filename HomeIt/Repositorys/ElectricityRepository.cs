@@ -7,44 +7,44 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeIt.Repositorys
 {
-    public class GasRepository : IRepository<Gas>
+    public class ElectricityRepository : IRepository<Electricity>
     {
         private DataContext _context;
 
-        public DbSet<Gas> _entity { get; } 
+        public DbSet<Electricity> _entity { get; } 
 
-        public GasRepository(DataContext context)
+        public ElectricityRepository(DataContext context)
         {
             _context = context;
-            _entity = context.Set<Gas>();
+            _entity = context.Set<Electricity>();
         }
-        public IEnumerable<Gas> GetAll()
+        public IEnumerable<Electricity> GetAll()
         {
             return _entity.AsEnumerable();
         }
 
-        public Gas Get(long id)
+        public Electricity Get(long id)
         {
             return _entity.FirstOrDefault(e => e.Id == id);
         }
 
-        public void Insert(Gas entity)
+        public void Insert(Electricity entity)
         {
             
             _context.Entry(entity).State = EntityState.Added;
             _context.SaveChanges();
         }
 
-        public void Update(Gas entity)
+        public void Update(Electricity entity)
         {
             _context.Update(entity);
             _context.SaveChanges();
         }
 
-        public void Delete(Gas entity)
+        public void Delete(Electricity entity)
         {
-            var item = Get(entity.Id);
-            _entity.Remove(item);
+            var electricity = Get(entity.Id);
+            _entity.Remove(electricity);
             _context.SaveChanges();
         }
 

@@ -38,6 +38,8 @@ namespace HomeIt
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IRepository<Gas>, GasRepository>();
+            services.AddTransient<IRepository<Water>, WaterRepository>();
+            services.AddTransient<IRepository<Electricity>, ElectricityRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
