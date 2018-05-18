@@ -18,6 +18,7 @@ namespace API.Controllers
     public class GasController : Controller
     {
         private IRepository<Gas> _repository;
+        private GasMapper mapper = new GasMapper();
 
         public GasController(IRepository<Gas> repository)
         {
@@ -28,7 +29,7 @@ namespace API.Controllers
         public IActionResult GetAllGas() => Ok(_repository.GetAll());
 
         [HttpGet]
-        [Route("/{id}")]
+        [Route("{id}")]
         public IActionResult GetGas(int id)
         {
             if (id == 0 )
@@ -40,7 +41,24 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult AddGas([FromBody]GasDTO command)
         {
-            var gas = command;
+            var gas = new Gas();;
+            mapper.MapToModel(command,gas);
+
+            _repository.Insert(gas);
+            return Created(String.Empty, gas);
+        }
+
+        [HttpPut]
+        
+        public IActionResult UpdateGas([FromBody]GasDTO command)
+        {
+            var gas = _repository.Get(command.Id);
+            
+            mapper.MapToModel(command, gas);
+
+            _repository.Update(gas);
+
+            return Ok();
         }
     }
 }
