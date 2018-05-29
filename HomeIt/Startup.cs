@@ -1,16 +1,14 @@
-﻿using HomeIt.Db;
-using HomeIt.Models;
-using HomeIt.Repositorys;
+﻿using API.DB;
+using API.Models;
+using API.Repositorys;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 
-
-namespace HomeIt
+namespace API
 {
     public class Startup
     {

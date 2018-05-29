@@ -1,6 +1,6 @@
-﻿using HomeIt.Enums;
+﻿using API.Enums;
 
-namespace HomeIt.Models
+namespace API.Models
 {
     public class Water : BaseUtility
     {

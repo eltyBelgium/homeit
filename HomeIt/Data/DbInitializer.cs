@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HomeIt.Db;
-using HomeIt.Models;
+using API.DB;
+using API.Models;
 
-namespace HomeIt.Data
+namespace API.Data
 {
     public class DbInitializer
     {

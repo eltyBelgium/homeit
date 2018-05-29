@@ -1,7 +1,6 @@
-﻿using System;
-using HomeIt.Enums;
+﻿using API.Enums;
 
-namespace HomeIt.Models
+namespace API.Models
 {
     public class Gas: BaseUtility
     {

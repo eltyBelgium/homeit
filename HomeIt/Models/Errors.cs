@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 
-namespace HomeIt.Models
+namespace API.Models
 {
     public class Errors
     {

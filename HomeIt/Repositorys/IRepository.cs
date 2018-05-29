@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using HomeIt.Models;
+﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace HomeIt.Repositorys
+namespace API.Repositorys
 {
     public interface IRepository<T> where T : class
     {

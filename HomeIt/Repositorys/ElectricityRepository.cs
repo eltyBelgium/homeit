@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using HomeIt.Db;
-using HomeIt.Models;
+using API.DB;
+using API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace HomeIt.Repositorys
+namespace API.Repositorys
 {
     public class ElectricityRepository : IRepository<Electricity>
     {

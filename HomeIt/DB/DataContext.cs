@@ -1,9 +1,7 @@
-﻿using System;
-using HomeIt.Models;
+﻿using API.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
-namespace HomeIt.Db
+namespace API.DB
 {
     public class DataContext : DbContext
     {

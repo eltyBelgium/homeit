@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using HomeIt.Enums;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using API.Enums;
 
-namespace HomeIt.Models
+namespace API.Models
 {
     public class BaseUtility
     {

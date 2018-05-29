@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using API.DTO.Infrastructure;
-using HomeIt.Models;
+using API.Models;
 
 namespace API.DTO
 {

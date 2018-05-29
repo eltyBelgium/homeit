@@ -1,4 +1,4 @@
-﻿namespace HomeIt.Enums
+﻿namespace API.Enums
 {
     public enum UtilityTypes
     {

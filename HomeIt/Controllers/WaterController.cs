@@ -4,9 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using API.DTO;
-using HomeIt.Db;
-using HomeIt.Models;
-using HomeIt.Repositorys;
+using API.Models;
+using API.Repositorys;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +49,6 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        
         public IActionResult Update([FromBody]WaterDTO command)
         {
             var item = _repository.Get(command.Id);
