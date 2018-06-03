@@ -16,29 +16,29 @@ namespace API.DTO
 
     }
 
-    public class GasMapper : MapperBase<Gas, GasDTO>
-    {
-        ////BCC/ BEGIN CUSTOM CODE SECTION 
-        ////ECC/ END CUSTOM CODE SECTION 
-        private BaseUtilityMapper _baseUtilityMapper = new BaseUtilityMapper();
-        public override Expression<Func<Gas, GasDTO>> SelectorExpression
-        {
-            get
-            {
-                return ((Expression<Func<Gas, GasDTO>>)(p => new GasDTO()
-                {
-                    ////BCC/ BEGIN CUSTOM CODE SECTION 
-                    ////ECC/ END CUSTOM CODE SECTION 
+    //public class GasMapper : MapperBase<Gas, GasDTO>
+    //{
+    //    ////BCC/ BEGIN CUSTOM CODE SECTION 
+    //    ////ECC/ END CUSTOM CODE SECTION 
+    //    private BaseUtilityMapper _baseUtilityMapper = new BaseUtilityMapper();
+    //    public override Expression<Func<Gas, GasDTO>> SelectorExpression
+    //    {
+    //        get
+    //        {
+    //            return ((Expression<Func<Gas, GasDTO>>)(p => new GasDTO()
+    //            {
+    //                ////BCC/ BEGIN CUSTOM CODE SECTION 
+    //                ////ECC/ END CUSTOM CODE SECTION 
 
-                })).MergeWith(this._baseUtilityMapper.SelectorExpression);
-            }
-        }
+    //            })).MergeWith(this._baseUtilityMapper.SelectorExpression);
+    //        }
+    //    }
 
-        public override void MapToModel(GasDTO dto, Gas model)
-        {
-            ////BCC/ BEGIN CUSTOM CODE SECTION 
-            ////ECC/ END CUSTOM CODE SECTION 
-            this._baseUtilityMapper.MapToModel(dto, model);
-        }
-    }
+    //    public override void MapToModel(GasDTO dto, Gas model)
+    //    {
+    //        ////BCC/ BEGIN CUSTOM CODE SECTION 
+    //        ////ECC/ END CUSTOM CODE SECTION 
+    //        this._baseUtilityMapper.MapToModel(dto, model);
+    //    }
+    //}
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using API.DTO;
 using API.Models;
 using API.Repositorys;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,12 @@ namespace API.Controllers
     public class GasController : Controller
     {
         private IRepository<Gas> _repository;
-        private GasMapper mapper = new GasMapper();
+        private IMapper _mapper;
 
-        public GasController(IRepository<Gas> repository)
+        public GasController(IRepository<Gas> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -41,10 +43,11 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult Add([FromBody]GasDTO command)
         {
-            var item = new Gas();;
-            mapper.MapToModel(command,item);
+
+            var item = _mapper.Map<GasDTO,Gas>(command);
 
             _repository.Insert(item);
+
             return Created(String.Empty, item);
         }
 
@@ -53,8 +56,7 @@ namespace API.Controllers
         public IActionResult Update([FromBody]GasDTO command)
         {
             var item = _repository.Get(command.Id);
-            
-            mapper.MapToModel(command, item);
+
 
             _repository.Update(item);
 
