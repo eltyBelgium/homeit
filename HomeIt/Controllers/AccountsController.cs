@@ -1,20 +1,21 @@
 ﻿using System.Threading.Tasks;
 using API.DB;
-using API.DTO;
 using API.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Route("api/accounts")]
     public class AccountsController : Controller
     {
         private readonly DataContext _appDbContext;
         private readonly UserManager<AppUser> _userManager;
-        private readonly AppUserMapper _mapper;
+        private readonly IMapper _mapper;
 
 
-        public AccountsController(UserManager<AppUser> userManager, AppUserMapper mapper, DataContext appDbContext)
+        public AccountsController(UserManager<AppUser> userManager, IMapper mapper, DataContext appDbContext)
         {
             _userManager = userManager;
             _mapper = mapper;
@@ -29,11 +30,11 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userIdentity = _mapper.Map(model);
+            var userIdentity = _mapper.Map<AppUser>(model);
 
             var result = await _userManager.CreateAsync(userIdentity, model.Password);
 
-            if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
+            //if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
 
             await _appDbContext.Customers.AddAsync(new Customer { IdentityId = userIdentity.Id, Location = model.Location });
             await _appDbContext.SaveChangesAsync();

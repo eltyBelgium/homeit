@@ -4,6 +4,7 @@ using API.Repositorys;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,13 @@ namespace API
         {
             services.AddMvc();
             services.AddAutoMapper();
+
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+                {
+                    options.User.RequireUniqueEmail = false;
+                })
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Home It ", Version = "v1" });
